@@ -1,0 +1,34 @@
+# vim: syntax=bash
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Linux .bashrc contents
+# OS Specific
+{{ if eq .chezmoi.os "linux" -}}
+
+{{ else if eq .chezmoi.os "windows" -}}
+alias pacman='sudo pacman'
+alias powertop='sudo powertop'
+alias pycharm='pycharm . >/dev/null 2>&1 & disown'
+
+read -r -d '' IWCTL_HELP << EOM
+Quick help:
+  adapter phy0 set-property Powered on
+  station wlan0 scan
+  station wlan0 get-networks
+  station wlan0 connect <Name>
+EOM
+
+alias iwctl="echo \"$IWCTL_HELP\";iwctl"
+
+export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
+{{ end -}}
+
+# Shared
+PS1='`promptum`'
+
+export HISTCONTROL=ignoreboth:erasedups
+
+alias ls='ls --color=auto'
+alias la='ls -Aslh'
+alias grep='grep --color=auto'
