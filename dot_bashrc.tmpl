@@ -2,11 +2,10 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Linux .bashrc contents
-# OS Specific
+##########
+# LINUX #
+##########
 {{ if eq .chezmoi.os "linux" -}}
-
-{{ else if eq .chezmoi.os "windows" -}}
 alias pacman='sudo pacman'
 alias powertop='sudo powertop'
 alias pycharm='pycharm . >/dev/null 2>&1 & disown'
@@ -22,13 +21,38 @@ EOM
 alias iwctl="echo \"$IWCTL_HELP\";iwctl"
 
 export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
+
+###########
+# WINDOWS #
+###########
+{{ else if eq .chezmoi.os "windows" -}}
+export FIGNORE=".dll:.DLL:.idea:.vscode"
+
+source /etc/profile.d/bash_completion.sh
+
+alias pycharm='~/.toolbox/pycharm.cmd `pwd`'
+alias pwsh='pwsh -NoLogo'
+
+{{ if eq .chezmoi.hostname "vaal-hazak" -}}
+function ssha {
+    eval `ssh-agent`
+    ssh-add /v/.ssh/odogaron_ed25519
+}
+alias subl='"C:\Program Files\Sublime Text\subl.exe"'
+alias dev='cd /h/002_Mojurasu/projects'
+
 {{ end -}}
 
-# Shared
-PS1='`promptum`'
+{{ end -}}
 
+export PS1='`promptum`'
+export EDITOR=vim
+export PS2=" "
 export HISTCONTROL=ignoreboth:erasedups
 
 alias ls='ls --color=auto'
 alias la='ls -Aslh'
 alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -h'
+
