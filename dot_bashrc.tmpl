@@ -2,10 +2,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+
+{{ if eq .chezmoi.os "linux" -}}
 ##########
 # LINUX #
 ##########
-{{ if eq .chezmoi.os "linux" -}}
 alias pacman='sudo pacman'
 alias powertop='sudo powertop'
 alias pycharm='pycharm . >/dev/null 2>&1 & disown'
@@ -22,10 +23,11 @@ alias iwctl="echo \"$IWCTL_HELP\";iwctl"
 
 export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
 
+
+{{ else if eq .chezmoi.os "windows" -}}
 ###########
 # WINDOWS #
 ###########
-{{ else if eq .chezmoi.os "windows" -}}
 export FIGNORE=".dll:.DLL:.idea:.vscode"
 
 source /etc/profile.d/bash_completion.sh
@@ -34,6 +36,9 @@ alias pycharm='~/.toolbox/pycharm.cmd `pwd`'
 alias pwsh='pwsh -NoLogo'
 
 {{ if eq .chezmoi.hostname "vaal-hazak" -}}
+##############
+# vaal-hazak #
+##############
 function ssha {
     eval `ssh-agent`
     ssh-add /v/.ssh/odogaron_ed25519
