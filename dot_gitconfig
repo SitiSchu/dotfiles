@@ -1,0 +1,48 @@
+[alias]
+l = log --format=\"format:%C(magenta bold)commit %H (%h) %C(red bold)[%C(auto)%D%C(red bold)]%C(reset)%n%C(blue bold)author %an <%ae>%n%C(green bold)gpg    %GK%C(reset)[%G?]%Creset%n%C(yellow bold)date   %ad%n%w(0,0,4)%n%s%n%n%b%n\"
+l1 = l -n 1
+fgpg = config commit.gpgsign true
+ds = diff --staged
+ap = add -p
+rp = restore -p
+s = status -s
+c = diff HEAD
+can = commit --amend --no-edit
+cm = commit -m
+cnm = commit -nm
+pushn = push --no-verify
+
+[core]
+autocrlf = false
+excludesFile = ~/.gitignore
+
+[advice]
+detachedHead = false
+
+[push]
+followTags = true
+default = current
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgSign = true
+
+[interactive]
+singleKey = true
+
+[include]
+path = .gitoverrides
+
+[pull]
+ff = true
+
+[init]
+    defaultBranch = master
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
