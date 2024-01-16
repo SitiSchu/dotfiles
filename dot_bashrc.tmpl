@@ -27,6 +27,8 @@ alias pycharm='~/.toolbox/pycharm.cmd `pwd`'
 alias pwsh='pwsh -NoLogo'
 alias open='explorer .'
 
+export PATH="$PATH:/c/Program Files\Sublime Text"
+
 {{ if eq .chezmoi.hostname "vaal-hazak" -}}
 ##############
 # vaal-hazak #
@@ -35,7 +37,8 @@ function ssha {
     eval `ssh-agent`
     ssh-add /v/.ssh/odogaron_ed25519
 }
-alias subl='"C:\Program Files\Sublime Text\subl.exe"'
+
+# alias subl='"C:\Program Files\Sublime Text\subl.exe"'
 alias dev='cd /h/002_Mojurasu/projects'
 
 {{ end -}}
