@@ -1,1 +1,6 @@
 .idea
+!.idea/fileTemplates
+.alg_meta/
+packages.pth
+.env
+sstest*
