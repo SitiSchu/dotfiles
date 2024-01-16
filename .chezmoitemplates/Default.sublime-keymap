@@ -1,3 +1,26 @@
 [
-    { "keys": ["ctrl+alt+c"], "command": "toggle_comment", "args": { "block": false } },
+    {
+        "keys": ["ctrl+alt+c"],
+        "command": "run_macro_file",
+        "args":
+        {
+            "file": "res://Packages/User/comment-line.sublime-macro"
+        },
+        "context":
+        [
+            {
+                "key": "selection_empty",
+                "operator": "equal",
+                "operand": "true",
+                "match_all": true
+            }
+        ]
+    },
+    {
+        "keys":
+        [
+            "ctrl+d"
+        ],
+        "command": "duplicate_line"
+    }
 ]
