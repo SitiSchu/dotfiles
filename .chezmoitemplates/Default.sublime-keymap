@@ -16,11 +16,7 @@
             }
         ]
     },
-    {
-        "keys":
-        [
-            "ctrl+d"
-        ],
-        "command": "duplicate_line"
-    }
+    { "keys": ["ctrl+d"],"command": "duplicate_line" },
+    { "keys": ["ctrl+w"], "command": "expand_selection", "args": {"to": "smart"} },
+    { "keys": ["ctrl+shift+w"], "command": "soft_undo" },
 ]
