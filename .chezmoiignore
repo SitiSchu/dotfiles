@@ -1,6 +1,11 @@
-{{ if ne .chezmoi.os "windows" }}
-AppData/
+{{ if eq .chezmoi.os "linux" }}
+AppData
 {{ end }}
-{{ if ne .chezmoi.os "linux" }}
-.config/
+
+
+{{ if eq .chezmoi.os "windows" }}
+*
+!AppData/
+!.bashrc
+!.gitconfig
 {{ end }}
