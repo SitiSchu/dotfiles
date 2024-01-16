@@ -8,4 +8,5 @@ AppData
 !AppData/
 !.bashrc
 !.gitconfig
+!.gitignore
 {{ end }}
