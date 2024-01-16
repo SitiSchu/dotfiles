@@ -3,6 +3,11 @@ AppData
 {{ end }}
 
 
+{{ if ne .chezmoi.os "android" }}
+.termux
+{{ end }}
+
+
 {{ if eq .chezmoi.os "windows" }}
 *
 !AppData/
