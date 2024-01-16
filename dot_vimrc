@@ -1,9 +1,14 @@
 syntax on
 filetype plugin indent on
+highlight LineNr ctermfg=grey
+
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
 set number
 set number relativenumber
+
 set backspace=indent,eol,start
-highlight LineNr ctermfg=grey
+
+set listchars=eol:$
