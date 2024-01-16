@@ -23,10 +23,9 @@ alias iwctl="echo \"$IWCTL_HELP\";iwctl"
 ###########
 export FIGNORE=".dll:.DLL:.idea:.vscode"
 
-source /etc/profile.d/bash_completion.sh
-
 alias pycharm='~/.toolbox/pycharm.cmd `pwd`'
 alias pwsh='pwsh -NoLogo'
+alias open='explorer .'
 
 {{ if eq .chezmoi.hostname "vaal-hazak" -}}
 ##############
@@ -57,5 +56,17 @@ alias la='ls -Aslh'
 alias grep='grep --color=auto'
 alias df='df -h'
 alias du='du -h'
+alias mkdir='mkdir -p'
+
+alias re='rez env --fail-graph'
+alias rc='rez context'
+alias rb='rez build'
+
+alias rg='rg --no-ignore'
+
 
 alias cm='chezmoi'
+
+if [ -f ~/.bash_overrides ]; then
+    source ~/.bash_overrides
+fi
