@@ -47,12 +47,14 @@ alias dev='cd /h/002_Mojurasu/projects'
 
 {{ end -}}
 
-export PS1='`promptum`'
-export EDITOR='vim'
-export PS2=" "
+if which promptum; then
+    export PS1='`promptum`'
+    export PS2=" "
+fi
 export HISTCONTROL=ignoreboth:erasedups
 
 export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
+export EDITOR='vim'
 
 alias ls='ls --color=auto'
 alias la='ls -Aslh'
