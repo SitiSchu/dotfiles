@@ -4,11 +4,11 @@ bluetooth_battery() {
     devices_connected=$(bluetoothctl devices Connected | grep Device | cut -d ' ' -f 2)
 
     if bluetoothctl show | grep -q "Powered: no"; then
-        printf ''
+        printf '\n'
         exit 1
     else
         if [ -z $devices_connected ]; then
-            printf ''
+            printf '\n'
             exit 1
         fi
     fi
