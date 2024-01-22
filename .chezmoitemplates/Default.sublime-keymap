@@ -19,4 +19,6 @@
     { "keys": ["ctrl+d"],"command": "duplicate_line" },
     { "keys": ["ctrl+w"], "command": "expand_selection", "args": {"to": "smart"} },
     { "keys": ["ctrl+shift+w"], "command": "soft_undo" },
+    { "keys": ["alt+j"], "command": "find_under_expand" },
+    { "keys": ["ctrl+alt+shift+j"], "command": "find_all_under" },
 ]
