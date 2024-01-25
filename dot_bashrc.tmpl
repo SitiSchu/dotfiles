@@ -45,10 +45,6 @@ alias dev='cd /h/002_Mojurasu/projects'
 
 {{ end -}}
 
-if type -P promptum &> /dev/null; then
-    export PS1='`promptum`'
-    export PS2=" "
-fi
 export HISTCONTROL=ignoreboth:erasedups
 
 export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
@@ -69,6 +65,12 @@ alias rg='rg --no-ignore'
 
 
 alias cm='chezmoi'
+
+
+if type -P promptum &> /dev/null; then
+    export PS1='`promptum`'
+    export PS2=" "
+fi
 
 if [ -f ~/.bash_overrides ]; then
     source ~/.bash_overrides
