@@ -84,7 +84,11 @@
                 {
                     "light": "Campbell"
                 },
+{{ if eq .chezmoi.hostname "vaal-hazak" -}}
+                "commandline": "C:\\msys64\\usr\\bin\\bash.exe -i",
+{{ else -}}
                 "commandline": "D:\\msys64\\usr\\bin\\bash.exe -i",
+{{ end -}}
                 "guid": "{37152d75-a690-4c25-a52b-40ff790d49ab}",
                 "hidden": false,
                 "icon": "D:\\msys64\\msys2.ico",
