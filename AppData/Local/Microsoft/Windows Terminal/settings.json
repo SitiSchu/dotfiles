@@ -34,26 +34,26 @@
     "copyOnSelect": false,
     "defaultProfile": "{37152d75-a690-4c25-a52b-40ff790d49ab}",
     "disableAnimations": true,
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
             "colorScheme": "Kuro",
-            "font":
+            "font": 
             {
-                "face": "FiraCode NFM",
+                "face": "FiraCode Nerd Font Mono",
                 "size": 9.0
             },
             "opacity": 56,
             "useAcrylic": true
         },
-        "list":
+        "list": 
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -80,19 +80,7 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{961e9103-1b38-5ece-afa1-109a8b9407e7}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{689f7801-49a9-5b0f-bab6-8cbd979cf835}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "colorScheme":
+                "colorScheme": 
                 {
                     "light": "Campbell"
                 },
@@ -105,7 +93,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
