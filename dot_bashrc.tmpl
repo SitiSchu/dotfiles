@@ -68,6 +68,7 @@ alias cm='chezmoi'
 
 
 if type -P promptum &> /dev/null; then
+    export PROMPT_COMMAND='export RETVAL=$?'
     export PS1='`promptum`'
     export PS2=" "
 fi
