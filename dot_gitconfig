@@ -40,4 +40,3 @@
 
 [init]
     defaultBranch = master
-	templateDir = \\\\pipeline-vfx\\pipeline\\standalone\\git_pre_commit\\\\.git-template
