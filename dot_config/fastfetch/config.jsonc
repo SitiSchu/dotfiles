@@ -26,7 +26,7 @@
       "binaryPrefix": "si"
     },
     "key": {
-      "width": 11,
+      "width": 0,
       "type": "string"
     }
   },
@@ -48,9 +48,9 @@
     "cpu",
     "memory",
     {
-      "type": "disk",
-      "key": "Disk",
-      "format": "{size-used} / {size-total} ({size-percentage})"
+      "type": "btrfs",
+      "key": "Btrfs ({name})",
+      "format": "{used} / {total} ({used-percentage})"
     }
   ]
 }
