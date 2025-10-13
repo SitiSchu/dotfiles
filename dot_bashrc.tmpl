@@ -43,6 +43,14 @@ function ssha {
 # alias subl='"C:\Program Files\Sublime Text\subl.exe"'
 alias dev='cd /h/002_Mojurasu/projects'
 
+function reencode {
+    basedir=$(dirname -- "$1")
+    filename=$(basename -- "$1")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    ffmpeg -i $1 -vcodec libx264 -crf 28 "$basedir/${filename}_reencoded.$extension"
+}
+
 {{ end -}}
 
 {{ end -}}
@@ -66,14 +74,6 @@ alias rb='rez build'
 alias rg='rg --no-ignore'
 
 alias cm='chezmoi'
-
-function reencode {
-    basedir=$(dirname -- "$1")
-    filename=$(basename -- "$1")
-    extension="${filename##*.}"
-    filename="${filename%.*}"
-    ffmpeg -i $1 -vcodec libx264 -crf 28 "$basedir/${filename}_reencoded.$extension"
-}
 
 if type -P promptum &> /dev/null; then
     export PROMPT_COMMAND='export RETVAL=$?'
