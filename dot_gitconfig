@@ -22,6 +22,7 @@
 [push]
     followTags = true
     default = current
+	autoSetupRemote = true
 
 [commit]
     gpgsign = true
@@ -37,6 +38,10 @@
 
 [pull]
     ff = true
+    rebase = true
 
 [init]
     defaultBranch = master
+
+[branch]
+	autoSetupMerge = always
