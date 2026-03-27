@@ -75,9 +75,13 @@ alias rg='rg --no-ignore'
 
 alias cm='chezmoi'
 
+__build_prompt(){
+    export RETVAL=$?
+    PS1="$(promptum)"
+}
+
 if type -P promptum &> /dev/null; then
-    export PROMPT_COMMAND='export RETVAL=$?'
-    export PS1='`promptum`'
+    export PROMPT_COMMAND='__build_prompt'
     export PS2=" "
 fi
 
