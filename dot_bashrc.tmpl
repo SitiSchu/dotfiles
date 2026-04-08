@@ -1,8 +1,8 @@
 # vim: syntax=bash
-{{ if eq .chezmoi.os "linux" -}}
 ##########
 # LINUX #
 ##########
+{{ if eq .chezmoi.os "linux" -}}
 alias pacman='sudo pacman'
 alias powertop='sudo powertop'
 alias pycharm='pycharm . >/dev/null 2>&1 & disown'
@@ -19,10 +19,10 @@ alias iwctl="echo \"$IWCTL_HELP\";iwctl"
 alias dc='docker compose'
 alias dcup='docker compose up -d'
 
-{{ else if eq .chezmoi.os "windows" -}}
 ###########
 # WINDOWS #
 ###########
+{{ else if eq .chezmoi.os "windows" -}}
 export FIGNORE=".dll:.DLL:.idea:.vscode"
 
 alias pycharm='~/.toolbox/pycharm.cmd `pwd`'
@@ -32,25 +32,100 @@ alias agent='pwsh ~/AppData/Local/cursor-agent/agent.ps1'
 
 export PATH="$PATH:/c/Program Files/Sublime Text"
 
-{{ if eq .chezmoi.hostname "vaal-hazak" -}}
+
 ##############
 # vaal-hazak #
 ##############
-function ssha {
-    eval `ssh-agent`
-    ssh-add /v/.ssh/odogaron_ed25519
-}
+{{ if eq .chezmoi.hostname "vaal-hazak" -}}
 
-# alias subl='"C:\Program Files\Sublime Text\subl.exe"'
 alias dev='cd /h/002_Mojurasu/projects'
 
-function reencode {
+function __get_last_recording_5ebbeaf3 {
+   find "$1" -maxdepth 1 -type f -name "*.mkv" -printf "%T@ %p\n" | sort -n | awk '{last=$0} END {print last}' | cut -d' ' -f2-
+}
+
+function rcl {
+    recordings_dir='/e/Libraries/Videos/Recordings'
+    reencode $(__get_last_recording_5ebbeaf3 $recordings_dir)
+}
+
+function __get_reencoding_target_path_ba3101ca {
     basedir=$(dirname -- "$1")
     filename=$(basename -- "$1")
-    extension="${filename##*.}"
     filename="${filename%.*}"
-    ffmpeg -i $1 -vcodec libx264 -crf 28 "$basedir/${filename}_reencoded.$extension"
+    echo "$basedir/${filename}_$2.$3"
 }
+
+function __move_orginal_file_into_subfolder_c74bd2f3 {
+    basedir=$(dirname -- "$1")
+    filename=$(basename -- "$1")
+    mkdir -p "$basedir/original"
+    mv "$1" "$basedir/original/$filename"
+}
+
+function __get_video_length_timecode {
+    echo $(ffprobe -v error -sexagesimal -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$1")
+}
+
+
+function reencode_cpu {
+    outputpath=$(__get_reencoding_target_path_ba3101ca "$1" "reencoded_cpu" "mp4")
+    ffmpeg -i $1 -vcodec libx264 -crf 23 "$outputpath"
+}
+
+function reencode {
+    length=$(__get_video_length_timecode "$1")
+    echo "Video Length: $length"
+
+    outputpath=$(__get_reencoding_target_path_ba3101ca "$1" "reencoded" "mp4")
+
+    acount=$(ffprobe -v error -select_streams a -show_entries stream=index -of csv=p=0 "$1" | wc -l)
+
+    if [ "$acount" -lt 1 ]; then
+        ffmpeg -hwaccel cuda -i "$1" -c:v h264_nvenc -preset:v p7 -tune:v hq -rc:v vbr -cq:v 26 -b:v 0 -profile:v high -an "$outputpath" && __move_orginal_file_into_subfolder_c74bd2f3 "$1"
+        exit
+    fi
+
+    ffmpeg -hwaccel cuda -i "$1" -c:v h264_nvenc -preset:v p7 -tune:v hq -rc:v vbr -cq:v 26 -b:v 0 -profile:v high -filter_complex "amerge=inputs=$acount" -ac 2 "$outputpath" && __move_orginal_file_into_subfolder_c74bd2f3 "$1"
+}
+
+function reencode_mute {
+    length=$(__get_video_length_timecode $1)
+    echo "Video Length: $length"
+    outputpath=$(__get_reencoding_target_path_ba3101ca "$1" "reencoded" "mp4")
+    ffmpeg -hwaccel cuda -i $1 -c:v h264_nvenc -preset:v p7 -tune:v hq -rc:v vbr -cq:v 26 -b:v 0 -profile:v high "$outputpath" && __move_orginal_file_into_subfolder_c74bd2f3 "$1"
+
+}
+
+
+function reencode_silent {
+    outputpath=$(__get_reencoding_target_path_ba3101ca "$1" "reencoded_silent" "mp4")
+    ffmpeg -an -hwaccel cuda -i $1 -c:v h264_nvenc -preset:v p7 -tune:v hq -rc:v vbr -cq:v 26 -b:v 0 -profile:v high "$outputpath"
+
+}
+
+convert_image() {
+    local input="$1"
+    local output="$2"
+
+    if [[ -z "$input" || -z "$output" ]]; then
+        echo "Usage: convert_image <input> <output>" >&2
+        return 1
+    fi
+
+    if [[ ! -f "$input" ]]; then
+        echo "Error: input file '$input' not found" >&2
+        return 1
+    fi
+
+    magick convert "$input" \
+        -depth 8 \
+        -resize 1200x1200\> \
+	-type TrueColor \
+	-strip -quality 95 \
+        PNG8:"$output"
+}
+
 
 {{ end -}}
 
@@ -86,8 +161,5 @@ if type -P promptum &> /dev/null; then
     export PS2=" "
 fi
 
-if [ -f ~/.bash_overrides ]; then
-    source ~/.bash_overrides
-fi
-
+[ -f ~/.bash_overrides ] && source ~/.bash_overrides
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash || true
