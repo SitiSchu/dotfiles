@@ -4,3 +4,4 @@
 packages.pth
 .env
 sstest*
+.venv
