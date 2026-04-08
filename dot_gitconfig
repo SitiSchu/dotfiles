@@ -5,11 +5,11 @@
     ds = diff --staged
     ap = add -p
     rp = restore -p
+    rps = restore -p -S
     s = status -s
     c = diff HEAD
     can = commit --amend --no-edit
     cm = commit -m
-    cnm = commit -nm
     pushn = push --no-verify
 
 [core]
