@@ -1,4 +1,5 @@
 silent! source $VIMRUNTIME/defaults.vim
+
 packadd comment
 
 colorscheme kuro
@@ -18,4 +19,20 @@ set backspace=indent,eol,start
 
 set listchars=eol:$
 
+" Strip trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Show quick reminders for common bindings.
+function! s:QuickHelp() abort
+  echo "Common bindings:"
+  echo "  gc  - toggle comment (comment plugin)"
+  echo "  gcc - toggle comment on current line"
+  echo "  gg  - go to top of file"
+  echo "  G   - go to bottom of file"
+  echo "  /   - search forward"
+  echo "  n/N - next/previous search result"
+endfunction
+
+command! Quickhelp call s:QuickHelp()
+cabbrev quickhelp Quickhelp
+
