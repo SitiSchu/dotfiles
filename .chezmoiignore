@@ -7,11 +7,3 @@ AppData
 .termux
 {{ end }}
 
-
-{{ if eq .chezmoi.os "windows" }}
-*
-!AppData/
-!.bashrc
-!.gitconfig
-!.gitignore
-{{ end }}
