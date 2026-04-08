@@ -44,4 +44,5 @@
     defaultBranch = master
 
 [branch]
-	autoSetupMerge = always
+    autoSetupMerge = always
+
