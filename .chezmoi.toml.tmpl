@@ -2,6 +2,8 @@
     autoCommit = true
     autoPush = true
 
+{{- $user := last (splitList "\\" .chezmoi.username) -}}
+
 {{ $work := false }}
 {{ $headless := false }}
 
@@ -11,10 +13,11 @@
 {{-     $headless = true -}}
 {{- end -}}
 
-{{ if ne .chezmoi.os "android" }}
+{{ if eq .chezmoi.os "android" }}
 {{-     $headless = true -}} {{/* Only used in Termux which is headless */}}
 {{- end -}}
 
 [data]
+    username = {{ $user | quote }}
     work = {{ $work }}
     headless = {{ $headless }}
