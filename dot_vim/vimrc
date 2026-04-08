@@ -1,6 +1,8 @@
 silent! source $VIMRUNTIME/defaults.vim
 packadd comment
 
+colorscheme kuro
+
 syntax on
 filetype plugin indent on
 highlight LineNr ctermfg=grey
@@ -17,5 +19,3 @@ set backspace=indent,eol,start
 set listchars=eol:$
 
 autocmd BufWritePre * :%s/\s\+$//e
-
-source colors.vim
