@@ -1,3 +1,20 @@
 [git]
     autoCommit = true
     autoPush = true
+
+{{ $work := false }}
+{{ $headless := false }}
+
+{{-   if eq .chezmoi.hostname "mizutsune" -}}
+{{-     $headless = true -}}
+{{-   else if eq .chezmoi.hostname "lagiacrus" -}}
+{{-     $headless = true -}}
+{{- end -}}
+
+{{ if ne .chezmoi.os "android" }}
+{{-     $headless = true -}} {{/* Only used in Termux which is headless */}}
+{{- end -}}
+
+[data]
+    work = {{ $work }}
+    headless = {{ $headless }}
