@@ -18,4 +18,4 @@ set listchars=eol:$
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-source ~/colors.vim
+source colors.vim
