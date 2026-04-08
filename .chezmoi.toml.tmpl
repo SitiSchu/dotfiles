@@ -1,25 +1,25 @@
-[git]
-    autoCommit = true
-    autoPush = true
-
 {{- $user := last (splitList "\\" .chezmoi.username) -}}
 
-{{ $work := false }}
-{{ $headless := false }}
+{{- $work := false -}}
+{{- $headless := false -}}
 
-{{-   if eq .chezmoi.hostname "mizutsune" -}}
+{{-  if eq .chezmoi.hostname "mizutsune" -}}
 {{-     $headless = true -}}
-{{-   else if eq .chezmoi.hostname "lagiacrus" -}}
+{{-  else if eq .chezmoi.hostname "lagiacrus" -}}
 {{-     $headless = true -}}
 {{- end -}}
 
-{{ if eq .chezmoi.os "android" }}
+{{- if eq .chezmoi.os "android" -}}
 {{-     $headless = true -}} {{/* Only used in Termux which is headless */}}
 {{- end -}}
 
-{{ - if eq $user "sschuerrle" - }}
+{{- if eq $user "sschuerrle" -}}
 {{-     $work = true -}}
 {{- end -}}
+
+[git]
+    autoCommit = true
+    autoPush = true
 
 [data]
     username = {{ $user | quote }}
