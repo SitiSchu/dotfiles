@@ -33,6 +33,6 @@ function! s:QuickHelp() abort
   echo "  n/N - next/previous search result"
 endfunction
 
-command! Quickhelp call s:QuickHelp()
-cabbrev quickhelp Quickhelp
+command! Qh call s:QuickHelp()
+cabbrev qh Qh
 
