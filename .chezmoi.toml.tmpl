@@ -17,6 +17,10 @@
 {{-     $headless = true -}} {{/* Only used in Termux which is headless */}}
 {{- end -}}
 
+{{ - if eq $user "sschuerrle" - }}
+{{-     $work = true -}}
+{{- end -}}
+
 [data]
     username = {{ $user | quote }}
     work = {{ $work }}
