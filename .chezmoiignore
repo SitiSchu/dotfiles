@@ -7,6 +7,8 @@ AppData
 .termux
 {{ end }}
 
-{{ if ne .chezmoi.osRelease.id "arch" }}
+{{ if eq .chezmoi.os "linux" }}
+    {{ if ne .chezmoi.osRelease.id "arch" }}
 .config/paru
+    {{ end }}
 {{ end }}
