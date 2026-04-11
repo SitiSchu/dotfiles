@@ -7,3 +7,6 @@ AppData
 .termux
 {{ end }}
 
+{{ if ne .chezmoi.osRelease.id "arch" }}
+.config/paru
+{{ end }}
