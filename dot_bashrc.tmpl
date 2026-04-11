@@ -132,6 +132,8 @@ convert_image() {
 {{ end -}}
 
 export HISTCONTROL=ignoreboth:erasedups
+# Changes how ls displays folders with 777 perms, mostly relevant for mounted NTFS shares where permissions are weird
+export LS_COLORS="ow=01;36;40"
 
 export PATH="~/.cargo/bin:~/go/bin:~/.local/share/JetBrains/Toolbox/scripts:~/.local/bin:$PATH"
 export EDITOR='vim'
