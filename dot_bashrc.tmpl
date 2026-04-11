@@ -151,6 +151,11 @@ alias rg='rg --no-ignore'
 
 alias cm='chezmoi'
 
+simple_prompt() {
+    unset PROMPT_COMMAND
+    export PS1='\n\w\n\u@\h \$ '
+}
+
 __build_prompt(){
     export RETVAL=$?
     PS1="$(promptum)"
